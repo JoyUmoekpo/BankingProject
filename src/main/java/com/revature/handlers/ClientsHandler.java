@@ -15,7 +15,7 @@ public class ClientsHandler {
 	public static Handler addAClientHandler = ctx -> {
 		Clients clients = ctx.bodyAsClass(Clients.class);
 		Connection conn = ConnectionUtils.createConnection();
-		PreparedStatement ptsmt = conn.prepareStatement("insert into clients values(?, ?)");
+		PreparedStatement ptsmt = conn.prepareStatement("insert into clients values(?,?)");
 		ptsmt.setInt(1, clients.getId());
 		ptsmt.setString(2, clients.getName());
 		ptsmt.execute();
