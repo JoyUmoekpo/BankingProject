@@ -9,13 +9,10 @@ public class App {
 public static void main(String[] args) {
 	Javalin app = Javalin.create().start(7070);
     
-    // POST /clients => Creates a new client
     app.post("/clients", ClientsHandler.addAClientHandler);
     
-    // GET /clients => return all clients
     app.get("/clients", ClientsHandler.getAllClientsHandler);
 
-    // GET /clients/12 => get client with ID 12
     app.get("/clients/{id}", ClientsHandler.getClientsByIdHandler);  
 
     app.put("/clients/{id}", ClientsHandler.updateClientsHandler);
@@ -23,6 +20,9 @@ public static void main(String[] args) {
     app.delete("/clients/{id}", ClientsHandler.deleteClientsHandler);  
     
     app.get("/clients/accounts/{id}", AccountsHandler.getAccountsByIdHandler);
+    
+    app.post("/clients/accounts/{id}", AccountsHandler.createAccountsHandler);
+
 
 }
 }

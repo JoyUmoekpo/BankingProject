@@ -32,11 +32,15 @@ public class AccountsHandler {
 		ptsmt.close();
 	};
 
-//	// POST /accounts (the body will contain a JSON with the info)
-//	public Handler createAccountHandler = ctx -> {
-//		int clientId = Integer.parseInt(ctx.pathParam("id"));
-//		String body = ctx.body();
-//		ctx.status(201);
-//	};
+	// POST new account to client id
+	public static Handler createAccountsHandler = ctx -> {
+		Accounts accounts = ctx.bodyAsClass(Accounts.class);
+		Connection conn = ConnectionUtils.createConnection();
+		PreparedStatement ptsmt = conn.prepareStatement("insert into accounts values(?,?) where account_number=?");
+		ptsmt.setInt(1, accounts.getId());
+		ptsmt.setInt(2, accounts.getId());
+		ptsmt.execute();
+		ctx.status(201);
+	};
 
 }
