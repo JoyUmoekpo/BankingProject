@@ -19,8 +19,7 @@ public class ClientsHandler {
 		ptsmt.setInt(1, clients.getId());
 		ptsmt.setString(2, clients.getName());
 		ptsmt.execute();
-		ctx.status(200);
-		ptsmt.close();
+		ctx.status(201);
 	};
 
 	public static Handler getAllClientsHandler = ctx -> {
@@ -54,7 +53,6 @@ public class ClientsHandler {
 			c = new Clients(id, name);
 			cList.add(c);
 		}
-
 		ctx.json(cList);
 		rs.close();
 		ptsmt.close();
@@ -63,8 +61,7 @@ public class ClientsHandler {
 	public static Handler updateClientsHandler = ctx -> {
 		int cl = Integer.parseInt(ctx.pathParam("id"));
 		Clients c = ctx.bodyAsClass(Clients.class);
-		Connection conn = ConnectionUtils.createConnection();
-		
+		Connection conn = ConnectionUtils.createConnection();		
 		PreparedStatement ptsmt = conn.prepareStatement("update clients set client_name=? where clientid=?");
 		ptsmt.setString(1, c.getName());
 		ptsmt.setInt(2, cl);
@@ -73,4 +70,14 @@ public class ClientsHandler {
 		
 	};
 
+	public static Handler deleteClientsHandler = ctx -> {
+		int cl = Integer.parseInt(ctx.pathParam("id"));
+		Connection conn = ConnectionUtils.createConnection();		
+		PreparedStatement ptsmt = conn.prepareStatement("delete from clients where clientid=?");
+		ptsmt.setInt(1, cl);
+		ptsmt.execute();
+		ctx.status(205);
+		ptsmt.close();
+	};
+	
 };

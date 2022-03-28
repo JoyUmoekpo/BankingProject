@@ -20,7 +20,9 @@ public static void main(String[] args) {
     // GET /clients/12 => get client with ID 12
     app.get("/clients/{id}", ClientsHandler.getClientsByIdHandler);  
 
-    app.put("/clients/{id}", ClientsHandler.updateClientsHandler);  
+    app.put("/clients/{id}", ClientsHandler.updateClientsHandler);
+
+    app.delete("/clients/{id}", ClientsHandler.deleteClientsHandler);    
 
 }
 }
