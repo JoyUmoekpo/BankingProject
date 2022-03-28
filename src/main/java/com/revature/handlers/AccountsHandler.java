@@ -27,6 +27,9 @@ public class AccountsHandler {
 			a = new Accounts(id, bal);
 			aList.add(a);
 		}
+		if(aList.size() == 0) {
+			ctx.status(404);
+		}
 		ctx.json(aList);
 		rs.close();
 		ptsmt.close();
