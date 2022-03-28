@@ -27,5 +27,25 @@ public class ClientsHandler {
         	ctx.json(cList);
         }
     };
-}
+    
+  public Handler getClientsByIdHandler = ctx -> {
+	  int cl = Integer.parseInt(ctx.pathParam("id"));
+	  Connection conn = ConnectionUtils.createConnection();
+	  String selectClients = "select * from clients where id=?";
+	  PreparedStatement ptsmt = conn.prepareStatement(selectClients);
+	  ptsmt.setInt(1, cl);
+	  ResultSet rs = ptsmt.executeQuery();
+	  ArrayList<Clients> cList = new ArrayList<Clients>();
+	  Clients c;
+	  while (rs.next()) {
+		  int id = rs.getInt("id");
+		  String name = rs.getString("name");
+		  c = new Clients(id, name);
+		  cList.add(c);
+	    }
 
+	    ctx.json(cList);
+	    rs.close();
+	    ptsmt.close();
+	};
+  };
