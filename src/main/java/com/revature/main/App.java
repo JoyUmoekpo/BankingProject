@@ -13,6 +13,7 @@ public static void main(String[] args) {
 
     // GET /clients => return all clients
     app.get("/clients", ClientsHandler.getAllClientsHandler);
+    
 
 }
 }
