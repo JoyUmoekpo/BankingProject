@@ -1,6 +1,6 @@
 package com.revature.main;
 
-//import com.revature.handlers.AccountsHandler;
+import com.revature.handlers.AccountsHandler;
 import com.revature.handlers.ClientsHandler;
 
 import io.javalin.Javalin;
@@ -9,8 +9,6 @@ public class App {
 public static void main(String[] args) {
 	Javalin app = Javalin.create().start(7070);
     
-    app.get("/", ctx->{ctx.result("Hello World");});
-
     // POST /clients => Creates a new client
     app.post("/clients", ClientsHandler.addAClientHandler);
     
@@ -22,7 +20,9 @@ public static void main(String[] args) {
 
     app.put("/clients/{id}", ClientsHandler.updateClientsHandler);
 
-    app.delete("/clients/{id}", ClientsHandler.deleteClientsHandler);    
+    app.delete("/clients/{id}", ClientsHandler.deleteClientsHandler);  
+    
+    app.get("/clients/accounts/{id}", AccountsHandler.getAccountsByIdHandler);
 
 }
 }

@@ -1,62 +1,40 @@
 package com.revature.entities;
 
 public class Accounts {
-    private int id;
-    private String accountNumber;
-    private int balanceInCents;
-    private int clientId;
+	private int id;
+	private int bal;
 
-    public Accounts(){
+	public Accounts() {
 		super();
-    }
+	}
 
-    public Accounts(int id, String accountNumber, int balanceInCents, int clientId) {
+	public Accounts(int id, int bal) {
 		super();
-    	this.id = id;
-        this.accountNumber = accountNumber;
-        this.balanceInCents = balanceInCents;
-        this.clientId = clientId;
-    }
+		this.id = id;
+		this.bal = bal;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getAccountNumber() {
-        return accountNumber;
-    }
+	public int getBal() {
+		return bal;
+	}
 
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
+	public void setBal(int bal) {
+		this.bal = bal;
+	}
 
-    public int getBalanceInCents() {
-        return balanceInCents;
-    }
+	@Override
+	public String toString() {
+		return "Accounts [id=" + id + 
+				", bal=" + bal + ", toString()=" + 
+				super.toString() + "]";
+	}
 
-    public void setBalanceInCents(int balanceInCents) {
-        this.balanceInCents = balanceInCents;
-    }
-
-    public int getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
-    }
-
-    @Override
-    public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", accountNumber='" + accountNumber + '\'' +
-                ", balanceInCents=" + balanceInCents +
-                ", clientId=" + clientId +
-                '}';
-    }
-}
+};
