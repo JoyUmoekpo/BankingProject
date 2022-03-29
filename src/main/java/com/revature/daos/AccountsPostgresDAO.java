@@ -13,6 +13,20 @@ import com.revature.utilities.ConnectionUtils;
 public class AccountsPostgresDAO implements AccountsDAO {
 
 	@Override
+	public boolean addAccounts(Accounts ac){
+		try (Connection conn = ConnectionUtils.createConnection()) {
+			PreparedStatement ptsmt = conn.prepareStatement("insert into accounts values(?,?)"); //? question marks
+			ptsmt.setInt(1, ac.getId());
+			ptsmt.setInt(2, ac.getBal());
+			ptsmt.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	@Override
 	public List<Accounts> getAccountsById(int aid) {
 
 		ArrayList<Accounts> aList = new ArrayList<Accounts>();
@@ -29,12 +43,12 @@ public class AccountsPostgresDAO implements AccountsDAO {
 				int bal = rs.getInt("account_balance");
 				a = new Accounts(id, bal);
 				aList.add(a);
+								
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		return aList;
-
 	}
 }
