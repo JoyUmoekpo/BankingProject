@@ -36,8 +36,7 @@ public class ClientsHandler {
 			int acc_num = rs.getInt("account_number");
 			c = new Clients(id, name, acc_num);
 			cList.add(c);
-			ctx.json(cList);
-			
+			ctx.json(cList);			
 		}
 	};
 
@@ -67,8 +66,8 @@ public class ClientsHandler {
 		Clients c = ctx.bodyAsClass(Clients.class);
 		Connection conn = ConnectionUtils.createConnection();		
 		PreparedStatement ptsmt = conn.prepareStatement("update clients set client_name=? where clientid=?");
-		ptsmt.setInt(1, cl);
-		ptsmt.setString(2, c.getName());
+		ptsmt.setString(1, c.getName());
+		ptsmt.setInt(2, cl);
 		ptsmt.execute();
 		ctx.status(201);
 		
