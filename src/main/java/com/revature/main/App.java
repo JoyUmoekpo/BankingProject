@@ -21,8 +21,6 @@ public static void main(String[] args) {
     
     app.get("/clients/accounts/{id}", AccountsHandler.getAccountsByIdHandler);
     
-    app.post("/clients/accounts/{id}", AccountsHandler.createAccountsHandler);
-
-
+    app.post("/clients/accounts", AccountsHandler.createAccountsHandler);
 }
 }

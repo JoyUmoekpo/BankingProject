@@ -39,7 +39,7 @@ public class AccountsHandler {
 	public static Handler createAccountsHandler = ctx -> {
 		Accounts accounts = ctx.bodyAsClass(Accounts.class);
 		Connection conn = ConnectionUtils.createConnection();
-		PreparedStatement ptsmt = conn.prepareStatement("insert into accounts values(?,?) where account_number=?");
+		PreparedStatement ptsmt = conn.prepareStatement("insert into accounts values(?,?) where account_number=?"); //? question marks
 		ptsmt.setInt(1, accounts.getId());
 		ptsmt.setInt(2, accounts.getId());
 		ptsmt.execute();

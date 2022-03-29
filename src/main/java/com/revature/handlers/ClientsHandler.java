@@ -18,6 +18,7 @@ public class ClientsHandler {
 		PreparedStatement ptsmt = conn.prepareStatement("insert into clients values(?,?)");
 		ptsmt.setInt(1, clients.getId());
 		ptsmt.setString(2, clients.getName());
+		ptsmt.setInt(3, clients.getAcc_num());
 		ptsmt.execute();
 		ctx.status(201);
 	};
@@ -32,7 +33,8 @@ public class ClientsHandler {
 		while (rs.next()) {
 			int id = rs.getInt("clientid");
 			String name = rs.getString("client_name");
-			c = new Clients(id, name);
+			int acc_num = rs.getInt("account_number");
+			c = new Clients(id, name, acc_num);
 			cList.add(c);
 			ctx.json(cList);
 		}
@@ -50,7 +52,8 @@ public class ClientsHandler {
 		while (rs.next()) {
 			int id = rs.getInt("clientid");
 			String name = rs.getString("client_name");
-			c = new Clients(id, name);
+			int acc_num = rs.getInt("account_number");
+			c = new Clients(id, name, acc_num);
 			cList.add(c);
 		}
 		ctx.json(cList);
@@ -61,10 +64,12 @@ public class ClientsHandler {
 	public static Handler updateClientsHandler = ctx -> {
 		int cl = Integer.parseInt(ctx.pathParam("id"));
 		Clients c = ctx.bodyAsClass(Clients.class);
+		int ac = Integer.parseInt(ctx.pathParam("account_number"));
 		Connection conn = ConnectionUtils.createConnection();		
 		PreparedStatement ptsmt = conn.prepareStatement("update clients set client_name=? where clientid=?");
-		ptsmt.setString(1, c.getName());
-		ptsmt.setInt(2, cl);
+		ptsmt.setInt(1, cl);
+		ptsmt.setString(2, c.getName());
+		ptsmt.setInt(3, ac);
 		ptsmt.execute();
 		ctx.status(201);
 		
