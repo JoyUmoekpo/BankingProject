@@ -17,8 +17,8 @@ public static void main(String[] args) {
 
     app.put("/clients/{id}", ClientsHandler.updateClientsHandler);
 
-    app.delete("/clients/{id}", ClientsHandler.deleteClientsHandler);  
-    
+    app.delete("/clients/{id}", ClientsHandler.deleteClientsHandler);
+        
     app.get("/clients/accounts/{id}", AccountsHandler.getAccountsByIdHandler);
     
     app.post("/clients/accounts", AccountsHandler.createAccountsHandler);

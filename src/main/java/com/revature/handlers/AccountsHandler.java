@@ -11,7 +11,7 @@ import com.revature.utilities.ConnectionUtils;
 import io.javalin.http.Handler;
 
 public class AccountsHandler {
-
+	
 	public static Handler getAccountsByIdHandler = ctx -> {
 		int ac = Integer.parseInt(ctx.pathParam("id"));
 		Connection conn = ConnectionUtils.createConnection();
@@ -39,9 +39,9 @@ public class AccountsHandler {
 	public static Handler createAccountsHandler = ctx -> {
 		Accounts accounts = ctx.bodyAsClass(Accounts.class);
 		Connection conn = ConnectionUtils.createConnection();
-		PreparedStatement ptsmt = conn.prepareStatement("insert into accounts values(?,?) where account_number=?"); //? question marks
+		PreparedStatement ptsmt = conn.prepareStatement("insert into accounts values(?,?)"); //? question marks
 		ptsmt.setInt(1, accounts.getId());
-		ptsmt.setInt(2, accounts.getId());
+		ptsmt.setInt(2, accounts.getBal());
 		ptsmt.execute();
 		ctx.status(201);
 	};
