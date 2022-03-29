@@ -1,5 +1,5 @@
 package com.revature.daos;
 
-public class AccountDAO {
+public interface ClientsDAO {
 
 }
