@@ -19,7 +19,7 @@ public static void main(String[] args) {
 
     app.delete("/clients/{id}", ClientsHandler.deleteClientsHandler);
         
-    app.get("/clients/accounts/{id}", AccountsHandler.getAccountsByIdHandler);
+    app.get("/clients/{id}/accounts", AccountsHandler.getAccountsByIdHandler);
     
     app.post("/clients/accounts", AccountsHandler.createAccountsHandler);
 }
