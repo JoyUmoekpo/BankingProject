@@ -37,6 +37,7 @@ public class ClientsHandler {
 			c = new Clients(id, name, acc_num);
 			cList.add(c);
 			ctx.json(cList);
+			
 		}
 	};
 
