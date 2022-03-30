@@ -22,27 +22,52 @@ public class ClientsDAOTests {
 	
 	@BeforeAll
 	static void clearOut() {
-		dao.deleteClients(400);
+		dao.deleteClients(112);
 	}
 
 	@Test
 	@Order(1)
 	void addingClients() {
-		Clients cl = new Clients(400,"Noé", 400);
+		Clients cl = new Clients(112,"Noé", 112);
 		dao.addAClient(cl);
 		ClientsDAOTests.clientsObject = cl;
-		Assertions.assertEquals(400, clientsObject.getId());
+		Assertions.assertEquals(112, clientsObject.getId());
 	}
 	
 	@Test
 	@Order(2)
 	void getClientsId() {
-		Clients cl = new Clients(400,"Noé", 400);
+		Clients cl = new Clients(112,"Noé", 112);
 		List<Clients> emptyList= new ArrayList<Clients>();
 		List<Clients> testList= new ArrayList<Clients>();
 		
 		testList =dao.getClientsById(cl.getId());
 		Assertions.assertNotEquals(emptyList, testList);
+	}
+	
+	@Test
+	@Order(3)
+	void getAllClients() {
+		List<Clients> testList = new ArrayList<Clients>();
+		List<Clients> emptyList = new ArrayList<Clients>();
+		testList = dao.getAllClients();
+		Assertions.assertNotEquals(emptyList, testList);
+	}
+	
+	@Test
+	@Order(4)
+	void updateClients() {
+		Clients cl = new Clients(112, "Chloe", 112);
+		dao.updateClients(cl, cl.getId());
+		Assertions.assertNotEquals(cl, clientsObject.getId());
+	}
+	
+	@Test
+	@Order(5)
+	void DeleteClientTest() {
+		Clients cl = new Clients(112, "Chloe", 112);
+		dao.deleteClients(cl.getId());
+		Assertions.assertNotEquals(cl, clientsObject);
 	}
 	
 }
