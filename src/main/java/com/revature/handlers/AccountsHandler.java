@@ -1,10 +1,14 @@
 package com.revature.handlers;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import com.revature.daos.AccountsDAO;
 import com.revature.daos.AccountsPostgresDAO;
 import com.revature.entities.Accounts;
+import com.revature.utilities.ConnectionUtils;
+
 import io.javalin.http.Handler;
 
 public class AccountsHandler {
@@ -24,16 +28,14 @@ public class AccountsHandler {
 	// POST new account to client id
 
 	public static Handler createAccountsHandler = ctx -> {
-		int aid = Integer.parseInt(ctx.pathParam("id"));
-		Accounts ac = ctx.bodyAsClass(Accounts.class);
-		if (dao.addAccounts(aid, ac)) {
-			ctx.result("Account added successfully.");
-			ctx.status(201);
-		}else {
-		
-		ctx.status(404);
-		}
-		
+		Accounts accounts = ctx.bodyAsClass(Accounts.class);
+		Connection conn = ConnectionUtils.createConnection();
+		PreparedStatement ptsmt = conn.prepareStatement("insert into accounts values(?,?)"); 
+		ptsmt.setInt(1, accounts.getId());
+		ptsmt.setInt(2, accounts.getBal());
+		ptsmt.execute();
+		ctx.status(201);
 	};
+
 
 }
