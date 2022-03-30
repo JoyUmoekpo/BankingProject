@@ -1,13 +1,10 @@
 package com.revature.handlers;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.List;
 
 import com.revature.daos.ClientsDAO;
 import com.revature.daos.ClientsPostgresDAO;
 import com.revature.entities.Clients;
-import com.revature.utilities.ConnectionUtils;
 
 import io.javalin.http.Handler;
 
@@ -46,12 +43,8 @@ public class ClientsHandler {
 
 	public static Handler deleteClientsHandler = ctx -> {
 		int cl = Integer.parseInt(ctx.pathParam("id"));
-		Connection conn = ConnectionUtils.createConnection();		
-		PreparedStatement ptsmt = conn.prepareStatement("delete from clients where clientid=?");
-		ptsmt.setInt(1, cl);
-		ptsmt.execute();
+		if (dao.deleteClients(cl));
 		ctx.status(205);
-		ptsmt.close();
 	};
 	
 };

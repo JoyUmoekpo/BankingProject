@@ -13,9 +13,9 @@ import com.revature.utilities.ConnectionUtils;
 public class AccountsPostgresDAO implements AccountsDAO {
 
 	@Override
-	public boolean addAccounts(Accounts ac){
+	public boolean addAccounts(int aid, Accounts ac){
 		try (Connection conn = ConnectionUtils.createConnection()) {
-			PreparedStatement ptsmt = conn.prepareStatement("insert into accounts values(?,?)"); //? question marks
+			PreparedStatement ptsmt = conn.prepareStatement("insert into accounts values(?,?)");
 			ptsmt.setInt(1, ac.getId());
 			ptsmt.setInt(2, ac.getBal());
 			ptsmt.execute();

@@ -14,6 +14,6 @@ public interface ClientsDAO {
 	
 	boolean updateClients(Clients c, int cl);
 	
-	boolean deleteClient(int cl);
+	boolean deleteClients(int cl);
 
 }

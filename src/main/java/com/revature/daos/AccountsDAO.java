@@ -6,7 +6,7 @@ import com.revature.entities.Accounts;
 
 public interface AccountsDAO {
 	
-	boolean addAccounts(Accounts ac);
+	boolean addAccounts(int aid, Accounts ac);
 	
 	List<Accounts> getAccountsById(int aid);
 	

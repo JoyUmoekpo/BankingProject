@@ -97,13 +97,21 @@ public class ClientsPostgresDAO implements ClientsDAO {
 			return false;
 		}
 	}
-	
 
 	@Override
-	public boolean deleteClient(int cl) {
+	public boolean deleteClients(int cl) {
 		// TODO Auto-generated method stub
-		return false;
+		try (Connection conn = ConnectionUtils.createConnection();) {
+			PreparedStatement ptsmt = conn.prepareStatement("delete from clients where clientid=?");
+			ptsmt.setInt(1, cl);
+			ptsmt.execute();
+			ptsmt.close();	
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
 	}
-
 
 }

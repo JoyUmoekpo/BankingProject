@@ -22,14 +22,18 @@ public class AccountsHandler {
 	};
 
 	// POST new account to client id
+
 	public static Handler createAccountsHandler = ctx -> {
+		int aid = Integer.parseInt(ctx.pathParam("id"));
 		Accounts ac = ctx.bodyAsClass(Accounts.class);
-		if (dao.addAccounts(ac)) {
+		if (dao.addAccounts(aid, ac)) {
 			ctx.result("Account added successfully.");
 			ctx.status(201);
+		}else {
+		
+		ctx.status(404);
 		}
 		
-		ctx.status(201);
 	};
 
 }
