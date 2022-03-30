@@ -21,6 +21,8 @@ public class AccountsHandler {
 		
 		if(aList.size() == 0)
 			ctx.status(404);
+			ctx.result("No client found.");
+
 		
 		ctx.json(aList);
 	};
@@ -35,6 +37,7 @@ public class AccountsHandler {
 		ptsmt.setInt(2, accounts.getBal());
 		ptsmt.execute();
 		ctx.status(201);
+		ctx.result("Account added successfully.");
 	};
 
 
