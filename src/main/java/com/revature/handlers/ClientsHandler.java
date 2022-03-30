@@ -39,13 +39,9 @@ public class ClientsHandler {
 	public static Handler updateClientsHandler = ctx -> {
 		int cl = Integer.parseInt(ctx.pathParam("id"));
 		Clients c = ctx.bodyAsClass(Clients.class);
-		Connection conn = ConnectionUtils.createConnection();		
-		PreparedStatement ptsmt = conn.prepareStatement("update clients set client_name=? where clientid=?");
-		ptsmt.setString(1, c.getName());
-		ptsmt.setInt(2, cl);
-		ptsmt.execute();
+		if (dao.updateClients(c, cl)) {
 		ctx.status(201);
-		
+		}
 	};
 
 	public static Handler deleteClientsHandler = ctx -> {

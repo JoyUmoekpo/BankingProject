@@ -12,7 +12,7 @@ public interface ClientsDAO {
 	
 	List<Clients> getClientsById(int cl);
 	
-	List<Clients> updateClients(int cl);
+	boolean updateClients(Clients c, int cl);
 	
 	boolean deleteClient(int cl);
 
